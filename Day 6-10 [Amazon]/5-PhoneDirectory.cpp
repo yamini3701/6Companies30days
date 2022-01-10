@@ -1,4 +1,4 @@
-//#6Companies30Days Challenge Amazon-12 (Phone Directory)
+//#6Companies30Days Challenge Amazon-5 (Phone Directory)
 
 // { Driver Code Starts
 // Initial Template for C++
