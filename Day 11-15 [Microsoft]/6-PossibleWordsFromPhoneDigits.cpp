@@ -15,34 +15,37 @@ using namespace std;
 class Solution
 {
     public:
-    void ans(int a[], int N, int curridx, string s, vector<string>&v, unordered_map<int, string>&mp)
-    {
-        if(curridx>=N)
-        {
-            v.push_back(s);
+    
+    void solve(int i, string res, unordered_map<int,string> hmap, int a[], int N, vector<string> &ans){
+        if(i>=N){
+            ans.push_back(res);
             return;
         }
-        string temp = mp[a[curridx]];
-        for(int i=0; i<temp.size(); i++)
-        ans(a, N, curridx+1, s+temp[i], v, mp);
-        return;
+        int key = a[i];
+        for(char ch: hmap[key]){
+            res += ch;
+            solve(i+1,res,hmap,a,N,ans);
+            res.pop_back();
+        }
     }
+    
     //Function to find list of all words possible by pressing given numbers.
     vector<string> possibleWords(int a[], int N)
     {
-        //Your code here
-        vector<string>v;
-        unordered_map<int, string>mp;
-        mp[2]="abc";
-        mp[3]="def";
-        mp[4]="ghi";
-        mp[5]="jkl";
-        mp[6]="mno";
-        mp[7]="pqrs";
-        mp[8]="tuv";
-        mp[9]="wxyz";
-        ans(a, N, 0, "", v, mp);
-        return v;
+        unordered_map<int,string> hmap;
+        hmap[1] = "";
+        hmap[2] = "abc";
+        hmap[3] = "def";
+        hmap[4] = "ghi";
+        hmap[5] = "jkl";
+        hmap[6] = "mno";
+        hmap[7] = "pqrs";
+        hmap[8] = "tuv";
+        hmap[9] = "wxyz";
+        string res = ""; //current result
+        vector<string> ans; //set of all the possible results
+        solve(0,res,hmap,a,N,ans);
+        return ans;
     }
 };
 
